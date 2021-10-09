@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import axios from "axios";
-import { User } from "../models/user";
 import {
-  Button,
   Table,
   TableBody,
   TableCell,
@@ -12,19 +10,21 @@ import {
   TableRow,
   TableContainer,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { Link } from "../models/link";
 
 interface Props {}
 
 const columns = [
   { id: "#", label: "#", width: "100px" },
-  { id: "name", label: "Name" },
-  { id: "email", label: "Email" },
-  { id: "actions", label: "Actions" },
+  { id: "code", label: "code" },
+  { id: "count", label: "count" },
+  { id: "revenue", label: "Revenue" },
 ];
 
-const Users: React.FC<Props> = () => {
-  const [users, setUsers] = useState<User[]>([]);
+const Links: React.FC<Props> = () => {
+  const { id } = useParams<{ id: string }>();
+  const [links, setLinks] = useState<Link[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -39,8 +39,9 @@ const Users: React.FC<Props> = () => {
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get("ambassadors");
-      setUsers(data);
+      const { data } = await axios.get(`users/${id}/links`);
+      console.log(data);
+      setLinks(data);
     })();
   }, []);
 
@@ -64,33 +65,23 @@ const Users: React.FC<Props> = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users
+            {links
               ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((user) => {
+              .map((link) => {
                 return (
-                  <TableRow hover tabIndex={-1} key={user.id}>
-                    <TableCell align="center">{user.id}</TableCell>
-                    <TableCell align="center">
-                      {user.first_name} {user.last_name}
-                    </TableCell>
-                    <TableCell align="center">{user.email}</TableCell>
-                    <TableCell align="center">
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        component={Link}
-                        to={`users/${user.id}/links`}
-                      >
-                        View
-                      </Button>
-                    </TableCell>
+                  <TableRow key={link.id}>
+                    <TableCell>{link.id}</TableCell>
+                    <TableCell>{link.code}</TableCell>
+                    <TableCell>{link.orders.length}</TableCell>
+                    <TableCell>{link.orders.reduce((s, o) => s + o.total, 0)}</TableCell>
                   </TableRow>
                 );
               })}
           </TableBody>
         </Table>
+
         <TablePagination
-          count={users?.length}
+          count={links?.length}
           component="div"
           page={page}
           onPageChange={handleChangePage}
@@ -103,4 +94,4 @@ const Users: React.FC<Props> = () => {
   );
 };
 
-export default Users;
+export default Links;

@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import axios from "axios";
+import Routes from './routes/routes';
+
+axios.defaults.baseURL = "http://localhost:8000/api/admin/";
+axios.defaults.withCredentials = true;
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Routes />
   </React.StrictMode>,
   document.getElementById('root')
 );

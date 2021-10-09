@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { User } from "../models/users";
+import { User } from "../models/user";
 import axios from "axios";
 interface Props {
   user?: User | null;

@@ -19,7 +19,7 @@ const adminRoutes = [
   },
   {
     exact: true,
-    path: "/",
+    path: "/users",
     component: <Users />,
   },
 ];

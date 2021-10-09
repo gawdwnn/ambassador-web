@@ -18,7 +18,7 @@ const Register: React.FC<Props> = () => {
   };
 
   if (redirect) {
-    return <Redirect to={"/"} />;
+    return <Redirect to={"/users"} />;
   }
 
   return (

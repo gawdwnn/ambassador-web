@@ -14,7 +14,6 @@ const Layout: React.FC<Props> = (props: any) => {
       try {
         const { data } = await axios.get("user");
         // props.setUser(data);
-        console.log(data);
       } catch (e) {
         setRedirect(true);
       }

@@ -8,6 +8,7 @@ const Register = lazy(() => import("../pages/Register/Register"));
 const Users = lazy(() => import("../pages/Users"));
 const Links = lazy(() => import("../pages/Links"));
 const Products = lazy(() => import("../pages/Products/Products"));
+const ProductForm = lazy(() => import("../pages/Products/ProductForm"));
 
 const adminRoutes = [
   {
@@ -36,9 +37,19 @@ const adminRoutes = [
     component: <Links />,
   },
   {
-    exact: false,
+    exact: true,
     path: "/products",
     component: <Products />,
+  },
+  {
+    exact: false,
+    path: "/products/create",
+    component: <ProductForm />,
+  },
+  {
+    exact: false,
+    path: "/products/:id/edit",
+    component: <ProductForm />,
   },
 ];
 

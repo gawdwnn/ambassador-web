@@ -13,6 +13,7 @@ import {
   TableRow,
 } from "@material-ui/core";
 import { ToggleButtonGroup } from "@material-ui/lab";
+import { Link } from "react-router-dom";
 
 interface Props {}
 
@@ -55,6 +56,16 @@ const Products: React.FC<Props> = () => {
 
   return (
     <Layout>
+      <div className="pt-3 pb-2 mb-3 border-bottom">
+        <Button
+          variant="contained"
+          color="primary"
+          component={Link}
+          to={`/products/create`}
+        >
+          Add
+        </Button>
+      </div>
       <TableContainer>
         <Table stickyHeader>
           <TableHead>
@@ -86,7 +97,8 @@ const Products: React.FC<Props> = () => {
                         <Button
                           variant="contained"
                           color="primary"
-                          href={`/products/${product.id}/edit`}
+                          component={Link}
+                          to={`/products/${product.id}/edit`}
                         >
                           Edit
                         </Button>

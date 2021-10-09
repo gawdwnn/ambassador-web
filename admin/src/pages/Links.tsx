@@ -40,7 +40,6 @@ const Links: React.FC<Props> = () => {
   useEffect(() => {
     (async () => {
       const { data } = await axios.get(`users/${id}/links`);
-      console.log(data);
       setLinks(data);
     })();
   }, []);

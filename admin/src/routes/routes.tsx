@@ -7,6 +7,7 @@ const Login = lazy(() => import("../pages/Login/Login"));
 const Register = lazy(() => import("../pages/Register/Register"));
 const Users = lazy(() => import("../pages/Users"));
 const Links = lazy(() => import("../pages/Links"));
+const Products = lazy(() => import("../pages/Products/Products"));
 
 const adminRoutes = [
   {
@@ -33,6 +34,11 @@ const adminRoutes = [
     exact: false,
     path: "/users/:id/links",
     component: <Links />,
+  },
+  {
+    exact: false,
+    path: "/products",
+    component: <Products />,
   },
 ];
 
